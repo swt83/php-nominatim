@@ -1,0 +1,11 @@
+{
+    "name": "travis/nominatum",
+    "description": "A PHP library for working w/ the Nominatum API.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Travis\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
