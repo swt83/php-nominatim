@@ -2,7 +2,7 @@
 
 namespace Travis;
 
-class Nominatum
+class Nominatim
 {
     public static function calc_point_grid($lat1, $lon1, $lat2, $lon2, $unit = 'km', $radius = 1, $is_to_geojson = false)
     {
