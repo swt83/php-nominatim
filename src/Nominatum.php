@@ -138,12 +138,12 @@ class Nominatum
         ];
     }
 
-    public static function get_coords($query, $timeout = 30)
+    public static function to_coords($query, $timeout = 30)
     {
         return static::request('https://nominatim.openstreetmap.org/search?q='.urlencode($query).'&format=json', $timeout);
     }
 
-    public static function get_address($lat, $lon, $timeout = 30)
+    public static function to_address($lat, $lon, $timeout = 30)
     {
         return static::request('https://nominatim.openstreetmap.org/reverse?lat='.urlencode($lat).'&lon='.urlencode($lon).'&format=json', $timeout);
     }

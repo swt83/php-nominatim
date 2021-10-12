@@ -77,22 +77,22 @@ stdClass Object
 */
 
 // find the area of various lat/lon coordinates
-$city = Nominatum::get_coords('Washington, DC');
+$city = Nominatum::to_coords('Washington, DC');
 $results = Nominatum::calc_area(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles');
 /*
 160.01340324464
 */
 
 // find the distance between two lat/lon coordinates
-$city1 = Nominatum::get_coords('Washington, DC');
-$city2 = Nominatum::get_coords('Williamsburg, VA');
+$city1 = Nominatum::to_coords('Washington, DC');
+$city2 = Nominatum::to_coords('Williamsburg, VA');
 $results = Nominatum::calc_distance(ex($city1, '0.lat'), ex($city1, '0.lon'), ex($city2, '0.lat'), ex($city2, '0.lon'), 'miles');
 /*
 113.64097836938
 */
 
 // produce a grid of points within the bounding box
-$city = Nominatum::get_coords('Washington, DC');
+$city = Nominatum::to_coords('Washington, DC');
 $results = Nominatum::calc_point_grid(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles', 1);
 /*
 This will produce an array of coordinates that blanket the city, equally
