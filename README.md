@@ -9,10 +9,10 @@ Normal install via Composer.
 ## Usage
 
 ```php
-use Travis\Nominatum;
+use Travis\Nominatim;
 
 // convert an address into lat/lon
-$results = Nominatum::to_coords('United States Capitol, Washington, DC');
+$results = Nominatim::to_coords('United States Capitol, Washington, DC');
 /*
 Array
 (
@@ -43,7 +43,7 @@ Array
 */
 
 // convert lat/lon into an address
-$results = Nominatum::to_address(38.88981295000001, -77.00902077737487);
+$results = Nominatim::to_address(38.88981295000001, -77.00902077737487);
 /*
 stdClass Object
 (
@@ -77,23 +77,23 @@ stdClass Object
 */
 
 // find the area of various lat/lon coordinates
-$city = Nominatum::to_coords('Washington, DC');
-$results = Nominatum::calc_area(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles');
+$city = Nominatim::to_coords('Washington, DC');
+$results = Nominatim::calc_area(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles');
 /*
 160.01340324464
 */
 
 // find the distance between two lat/lon coordinates
-$city1 = Nominatum::to_coords('Washington, DC');
-$city2 = Nominatum::to_coords('Williamsburg, VA');
-$results = Nominatum::calc_distance(ex($city1, '0.lat'), ex($city1, '0.lon'), ex($city2, '0.lat'), ex($city2, '0.lon'), 'miles');
+$city1 = Nominatim::to_coords('Washington, DC');
+$city2 = Nominatim::to_coords('Williamsburg, VA');
+$results = Nominatim::calc_distance(ex($city1, '0.lat'), ex($city1, '0.lon'), ex($city2, '0.lat'), ex($city2, '0.lon'), 'miles');
 /*
 113.64097836938
 */
 
 // produce a grid of points within the bounding box
-$city = Nominatum::to_coords('Washington, DC');
-$results = Nominatum::calc_point_grid(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles', 1);
+$city = Nominatim::to_coords('Washington, DC');
+$results = Nominatim::calc_point_grid(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles', 1);
 /*
 This will produce an array of coordinates that blanket the city, equally
 distanced apart.  This has some niche uses, particularly with other APIs.
