@@ -11,10 +11,11 @@ class Nominatum
         // init
         $coords = [];
 
-        $north = $lat2;
-        $south = $lat1;
-        $east = $lon2;
-        $west = $lon1;
+        // fix coords if they are given in wrong order
+        $north = $lat2 > $lat1 ? $lat2 : $lat1;
+        $south = $lat2 > $lat1 ? $lat1 : $lat2;
+        $east = $lon2 > $lon1 ? $lon2 : $lon1;
+        $west = $lon2 > $lon1 ? $lon1 : $lon2;
 
         $x_fraction = $radius / static::calc_distance($south, $west, $south, $east, $unit);
         $cell_width = $x_fraction * ($east - $west);
@@ -30,15 +31,24 @@ class Nominatum
         $delta_x = ($bbox_width - $columns * $cell_width) / 2;
         $delta_y = ($bbox_height - $rows * $cell_height) / 2;
 
+        // this point grid starts at the bottom left and builds to the top right
+
         $current_x = $west + $delta_x;
         while ($current_x <= $east)
         {
             $current_y = $south + $delta_y;
             while ($current_y <= $north)
             {
+                $sw_lat = $current_y;
+                $sw_lon = $current_x;
+                $ne_lat = $current_y + $cell_height;
+                $ne_lon = $current_x + $cell_width;
+
                 $coords[] = [
-                    'lat' => $current_y,
-                    'lon' => $current_x,
+                    'sw_lat' => $sw_lat,
+                    'sw_lon' => $sw_lon,
+                    'ne_lat' => $ne_lat,
+                    'ne_lon' => $ne_lon,
                 ];
 
                 $current_y += $cell_height;
@@ -57,7 +67,7 @@ class Nominatum
                     $string .= '"type": "Feature",';
                     $string .= '"geometry": {';
                         $string .= '"type": "Point",';
-                        $string .= '"coordinates": ['.$coord['lon'].', '.$coord['lat'].']';
+                        $string .= '"coordinates": ['.$coord['sw_lon'].', '.$coord['sw_lat'].']';
                     $string .= '},';
                     $string .= '"properties": {';
                         $string .= '"prop0": "value0"';
