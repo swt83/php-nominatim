@@ -2,6 +2,15 @@
     "name": "travis/nominatum",
     "description": "A PHP library for working w/ the Nominatum API.",
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:swt83/php-ex.git"
+        }
+    ],
+    "require": {
+        "travis/ex": "1.0.*"
+    },
     "autoload": {
         "psr-4": {
             "Travis\\": "src/"

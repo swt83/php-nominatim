@@ -11,6 +11,7 @@ Normal install via Composer.
 ```php
 use Travis\Nominatum;
 
+// convert an address into lat/lon
 $results = Nominatum::to_coords('United States Capitol, Washington, DC');
 /*
 Array
@@ -41,6 +42,7 @@ Array
 )
 */
 
+// convert lat/lon into an address
 $results = Nominatum::to_address(38.88981295000001, -77.00902077737487);
 /*
 stdClass Object
@@ -73,6 +75,35 @@ stdClass Object
 
 )
 */
+
+// find the area of various lat/lon coordinates
+$city = Nominatum::get_coords('Washington, DC');
+$results = Nominatum::calc_area(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles');
+/*
+160.01340324464
+*/
+
+// find the distance between two lat/lon coordinates
+$city1 = Nominatum::get_coords('Washington, DC');
+$city2 = Nominatum::get_coords('Williamsburg, VA');
+$results = Nominatum::calc_distance(ex($city1, '0.lat'), ex($city1, '0.lon'), ex($city2, '0.lat'), ex($city2, '0.lon'), 'miles');
+/*
+113.64097836938
+*/
+
+// produce a grid of points within the bounding box
+$city = Nominatum::get_coords('Washington, DC');
+$results = Nominatum::calc_point_grid(ex($city, '0.boundingbox.0'), ex($city, '0.boundingbox.2'), ex($city, '0.boundingbox.1'), ex($city, '0.boundingbox.3'), 'miles', 1);
+/*
+This will produce an array of coordinates that blanket the city, equally
+distanced apart.  This has some niche uses, particularly with other APIs.
+This code can also produce JSON that you can test on GeoJson.io.
+*/
 ```
 
 See the [API Guide](https://nominatim.org/release-docs/develop/api/Overview/) for additional methods.
+
+## References
+
+- [Geolocation](https://github.com/anthonymartin/GeoLocation-PHP) - Distance logic.
+- [TurfJS](https://github.com/Turfjs/turf/blob/master/packages/turf-point-grid/index.ts) - Point grid logic.
