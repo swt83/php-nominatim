@@ -1,6 +1,6 @@
-# Nominatum
+# Nominatim
 
-A PHP library for working w/ the Nominatum API.
+A PHP library for working w/ the Nominatim API.
 
 ## Install
 

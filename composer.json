@@ -1,6 +1,6 @@
 {
-    "name": "travis/nominatum",
-    "description": "A PHP library for working w/ the Nominatum API.",
+    "name": "travis/nominatim",
+    "description": "A PHP library for working w/ the Nominatim API.",
     "license": "MIT",
     "repositories": [
         {
